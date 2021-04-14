@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-class Exceptions {
+public class Exceptions {
 
-    public static void main(String[] args) {
+    public void Display() {
         ArrayList<Object> myList = new ArrayList<Object>();
         myList.add("13");
         myList.add("hello world");
