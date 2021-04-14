@@ -45,5 +45,9 @@ public void setSlices(int slices){
     // Things you can do w pizza object
     // Advertise()
     // East()
+public void displayPizza(){
+    System.out.printf("This is a %s pizza with %s slices", this.name, this.slices);
+
+}
     
 }
