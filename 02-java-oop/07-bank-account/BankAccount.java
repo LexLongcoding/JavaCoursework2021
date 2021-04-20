@@ -66,19 +66,4 @@ public class BankAccount {
         // %.2f formats decimal to the 10s place
         System.out.println(String.format("Savings: %.2f, Checking: %.2f", this.savingsBal, this.checkingBal));
     }
-
-    public static void main(String[] args) {
-        BankAccount ba = new BankAccount();
-        ba.depositMoney(100.49, "checking");
-        ba.depositMoney(3.00, "savings");
-        ba.displayAccountBalance();
-
-        System.out.println(BankAccount.totalHoldings);
-
-        ba.withdrawMoney(50, "checking");
-        ba.withdrawMoney(50, "savings");
-        ba.displayAccountBalance();
-
-        System.out.println(BankAccount.totalHoldings);
-    }
 }
