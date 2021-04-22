@@ -1,10 +1,10 @@
-package com.lex.strings;
+package com.lex.controllerspractice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class ControllerspracticeApplicationTests {
 
 	@Test
 	void contextLoads() {
