@@ -1,5 +1,5 @@
 package com.lex.dojosurvey.models;
-
+//getters and setters
 public class Survey {
 	private String name;
 	private String location;
