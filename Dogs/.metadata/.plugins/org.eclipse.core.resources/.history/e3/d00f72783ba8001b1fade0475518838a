@@ -1,0 +1,11 @@
+package come.lex.dogs.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.lex.dogs.models.Dog;
+
+@Repository
+public interface DogRepository extends CrudRepository<Dog, Long> {
+
+}

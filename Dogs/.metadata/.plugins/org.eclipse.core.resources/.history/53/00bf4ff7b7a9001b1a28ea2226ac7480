@@ -1,0 +1,5 @@
+package com.lex.dogs.controllers;
+
+public class DogController {
+
+}

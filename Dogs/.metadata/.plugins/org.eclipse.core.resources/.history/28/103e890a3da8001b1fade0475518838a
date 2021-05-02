@@ -1,0 +1,12 @@
+package com.lex.dogs.services;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class DogService {
+	//dependency inject our repository so the service has access to all methods in the repository interface
+	private DogRepository dRepo;
+	public DogService(DogRepository repo) {
+		this.dRepo = repo;
+	}
+}

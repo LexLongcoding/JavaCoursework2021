@@ -1,0 +1,5 @@
+package com.lex.dogs.services;
+
+public class DogService {
+
+}

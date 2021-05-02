@@ -1,0 +1,32 @@
+package com.lex.dogs.models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "dogs")
+public class Dog {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private String breed;
+	private int age;
+	
+	
+	public Dog() {
+	}
+	
+	public Dog(String name, String breed, int age) {
+		super();
+		this.name = name;
+		this.breed = breed;
+		this.age = age;
+	}
+	
+	
+
+}
