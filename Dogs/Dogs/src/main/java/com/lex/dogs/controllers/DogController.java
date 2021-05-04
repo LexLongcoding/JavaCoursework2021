@@ -11,17 +11,22 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lex.dogs.models.Dog;
+import com.lex.dogs.models.Tag;
 import com.lex.dogs.services.DogService;
+import com.lex.dogs.services.TagService;
 
 @Controller
 public class DogController {
 	@Autowired
 	private DogService dService;
+	@Autowired
+	private TagService tService;
 	
 	@GetMapping("/")
 	public String index(Model viewModel) {
@@ -40,6 +45,21 @@ public class DogController {
 		}
 		this.dService.createDog(dog);
 		return "redirect:/";
+	}
+	
+	@PostMapping("/addTag/{id}")
+	public String addTag(@Valid @ModelAttribute("tag")Tag tag, BindingResult result, @PathVariable("id")Long id) {
+		Dog dogToAdd = this.dService.getSingleDog(id);
+		tag.setDog(dogToAdd);
+		this.tService.createTag(tag);
+		return "redirect:/{id}";
+	}
+	
+	@GetMapping("/{id}")
+	public String showDog(@PathVariable("id")Long id, Model viewModel, @ModelAttribute("tag") Tag tag) {
+		Dog dogToShowcase = this.dService.getSingleDog(id);
+		viewModel.addAttribute("dog",dogToShowcase);
+		return "show.jsp";
 	}
 	
 	@PostMapping("/addHTMLway")

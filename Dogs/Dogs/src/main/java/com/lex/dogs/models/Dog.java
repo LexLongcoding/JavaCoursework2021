@@ -2,11 +2,14 @@ package com.lex.dogs.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -30,6 +33,9 @@ public class Dog {
 	private String name;
 	@NotBlank // works for spaces.
 	private String breed;
+	
+	@OneToOne(mappedBy="dog", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Tag tag;
 	
 	private int age;
 	@Column(updatable=false)
@@ -101,6 +107,12 @@ public class Dog {
 		this.updatedAt = updatedAt;
 	}
 	
-	
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
 
 }
