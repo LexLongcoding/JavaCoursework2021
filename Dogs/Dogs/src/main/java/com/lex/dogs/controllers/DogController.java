@@ -47,12 +47,35 @@ public class DogController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String deletePet(@PathVariable ("id")Long id) {
+		this.dService.deleteDog(id);
+		return"redirect:/";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String editDog(@PathVariable("id")Long id, @ModelAttribute("dog")Dog dog, Model viewModel) {
+		viewModel.addAttribute("dog", this.dService.getSingleDog(id));
+		return "edit.jsp";
+	}
+	
+	
 	@PostMapping("/addTag/{id}")
 	public String addTag(@Valid @ModelAttribute("tag")Tag tag, BindingResult result, @PathVariable("id")Long id) {
 		Dog dogToAdd = this.dService.getSingleDog(id);
 		tag.setDog(dogToAdd);
 		this.tService.createTag(tag);
 		return "redirect:/{id}";
+	}
+	
+	@PostMapping("/edit/{id}")
+	public String processEdit(@Valid @ModelAttribute("dog")Dog dog, BindingResult result, Model viewModel, @PathVariable("id")Long id) {
+		if(result.hasErrors()) {
+			viewModel.addAttribute("dog", this.dService.getSingleDog(id));
+			return "edit.jsp";
+		}
+		this.dService.updateDog(dog);
+		return"redirect:/{id}";
 	}
 	
 	@GetMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.lex.dogs.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -44,6 +46,9 @@ public class Dog {
 	@DateTimeFormat(pattern = "yyy-MM-DD HH:mm:ss")
 	private Date updatedAt;
 	
+	@OneToMany(mappedBy = "dog", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Toy> toys;
+	
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -56,6 +61,12 @@ public class Dog {
 	public Dog() {
 	}
 	
+	public List<Toy> getToys() {
+		return toys;
+	}
+	public void setToys(List<Toy> toys) {
+		this.toys = toys;
+	}
 	public Dog(String name, String breed, int age) {
 		super();
 		this.name = name;

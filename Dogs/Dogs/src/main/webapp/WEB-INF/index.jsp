@@ -9,12 +9,15 @@
 <body>
 <div class="container">
 <h1> Hey, this is my dog page </h1>
+<a href="/add">Add A New Dog</a> <a href="/toys/new">Give a toy to a dog</a>
 <table class="table table-dark">
 <thead>
 <td>ID</td>
 <td>Name</td>
 <td>Breed<td>
 <td>Age</td>
+<td>Registered</td>
+<td>Actions</td>
 </thead>
 <tbody>
 <c:forEach items="${dogs}" var="dog">
@@ -34,6 +37,7 @@
 </c:choose>
 
 </td>
+<td><a href="/delete/${dog.id}">Delete</a></td>
 </tr>
 </c:forEach>
 </tbody>

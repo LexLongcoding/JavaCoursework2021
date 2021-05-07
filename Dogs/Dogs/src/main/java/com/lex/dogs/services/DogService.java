@@ -35,6 +35,7 @@ public class DogService{
 	public void deleteDog(Long id) {
 		this.dRepo.deleteById(id);
 	}
+	
 	// create Dog with HTML forms
 	public Dog createDogHTML(String name, String breed, int age) {
 		Dog newDog = new Dog(name, breed, age);

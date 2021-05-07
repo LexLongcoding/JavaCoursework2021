@@ -19,6 +19,13 @@
 <p>Age: ${dog.age}</p>
 
 <hr>
+<h2>Toys</h2>
+<ol>
+<c:forEach items="${dog.toys}" var="toy">
+<li>${toy.name} (${toy.price}) - ${toy.description}</li>
+
+</c:forEach>
+</ol>
 
 <c:choose>
 <c:when test="${dog.tag != null }">
@@ -46,6 +53,8 @@
 </c:otherwise>
 
 </c:choose>
+<a href="/edit/${dog.id}">Edit Dog</a>
+
 
 
 </div>
