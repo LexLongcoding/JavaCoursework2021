@@ -1,7 +1,0 @@
-package com.lex.dogs.models;
-
-@Entity
-@Table(name = "dogs")
-public class Dog {
-
-}

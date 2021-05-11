@@ -17,6 +17,15 @@
 <p>Name: ${dog.name }</p>
 <p>Breed: ${dog.breed }</p>
 <p>Age: ${dog.age}</p>
+<hr>
+<h3>Liked By:</h3>
+<ol>
+<c:forEach items="${dog.likers}" var="user">
+<li>${user.firstName} ${user.lastName}</li>
+</c:forEach>
+
+
+</ol>
 
 <hr>
 <h2>Toys</h2>

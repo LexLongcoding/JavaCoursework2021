@@ -1,5 +1,0 @@
-package com.lex.dogs.repository;
-
-public interface DogRepository {
-
-}
