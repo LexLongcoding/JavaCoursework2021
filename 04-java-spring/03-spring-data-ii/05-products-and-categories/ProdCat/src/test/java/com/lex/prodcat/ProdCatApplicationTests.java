@@ -1,10 +1,10 @@
-package com.lex.cats;
+package com.lex.prodcat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CatsApplicationTests {
+class ProdCatApplicationTests {
 
 	@Test
 	void contextLoads() {
