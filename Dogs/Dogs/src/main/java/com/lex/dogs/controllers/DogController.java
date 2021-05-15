@@ -23,6 +23,7 @@ import com.lex.dogs.models.User;
 import com.lex.dogs.services.DogService;
 import com.lex.dogs.services.TagService;
 import com.lex.dogs.services.UserService;
+import com.lex.dogs.validators.UserValidator;
 
 @Controller
 public class DogController {
@@ -32,15 +33,35 @@ public class DogController {
 	private TagService tService;
 	@Autowired
 	private UserService uService;
+	@Autowired
+	private UserValidator validator;
+	
 	
 	@GetMapping("/")
-	public String baseRoute(Model viewModel) {
-		viewModel.addAttribute("users", this.uService.allUsers());
+	public String baseRoute(Model viewModel, @ModelAttribute("user")User user) {
 		return "landing.jsp";
 	}
 	
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute("user")User user, BindingResult result, HttpSession session) {
+		validator.validate(user, result);
+		if(result.hasErrors()) {
+			return "landing.jsp";
+		}
+		
+		User newUser = this.uService.registerUser(user);
+		session.setAttribute("user_id", newUser.getId());
+		return "redirect:/dogs";
+		
+	}
+	
+	
 	@GetMapping("/dogs")
 	public String index(Model viewModel, HttpSession session) {
+		if(session.getAttribute("user_id") == null) {
+			return"redirect:/";
+		}
+		
 		Long userId = (Long)session.getAttribute("user__id");
 		System.out.println(userId);
 		User user = this.uService.find(userId);
@@ -51,13 +72,17 @@ public class DogController {
 	}
 	
 	@PostMapping("/login")
-	public String login(HttpSession session, @RequestParam("users") Long id) {
-		if(session.getAttribute("user__id") == null) {
-			session.setAttribute("user__id", id);
+	public String login(@RequestParam("loginEmail") String email, @RequestParam("loginPass") String password, RedirectAttributes redirectAttr, HttpSession session) {
+		if(!this.uService.authenticateUser(email, password)) {
+			redirectAttr.addFlashAttribute("loginerror","Invalid Credentials");
+			return "redirect:/";
 		}
+		User user = this.uService.getByEmail(email);
+		session.setAttribute("user_id", user.getId());
 		return "redirect:/dogs";
+		
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
