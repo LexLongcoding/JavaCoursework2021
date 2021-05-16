@@ -19,28 +19,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tags")
 public class Tag {
-	public Tag() {
-	}
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String subject;
-	@Column(updatable=false)
 	private Date createdAt;
 	private Date updatedAt;
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
-			name = "questions_tagss",
-			joinColumns = @JoinColumn(name="tag_id"),
-			inverseJoinColumns = @JoinColumn(name = "question_id")
+		name="tags_questions",
+		joinColumns = @JoinColumn(name="tag_id"),
+		inverseJoinColumns = @JoinColumn(name="question_id")
 	)
-	private List <Question> questions;
-	public List<Question> getQuestions() {
-		return questions;
+	private List<Question> questions;
+	
+	public Tag() {
 	}
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+
+	public Tag(String subject) {
+		this.subject = subject;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -65,19 +64,18 @@ public class Tag {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	public List<Question> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
 	@PrePersist
-	public void onCreate() {
+	protected void onCreate() {
 		this.createdAt = new Date();
 	}
-	
 	@PostPersist
-	public void onUpdated() {
+	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
-	
-	
-	
-	
-
 }
