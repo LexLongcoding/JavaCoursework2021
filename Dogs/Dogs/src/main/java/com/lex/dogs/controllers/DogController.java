@@ -58,11 +58,13 @@ public class DogController {
 	
 	@GetMapping("/dogs")
 	public String index(Model viewModel, HttpSession session) {
-		if(session.getAttribute("user_id") == null) {
+		Long userId = (Long)session.getAttribute("user_id");
+		System.out.println((Long)session.getAttribute("user_id"));
+		if(userId == null) {
 			return"redirect:/";
 		}
 		
-		Long userId = (Long)session.getAttribute("user__id");
+		
 		System.out.println(userId);
 		User user = this.uService.find(userId);
 		List<Dog> allDogs = this.dService.getAllDogs();
@@ -78,7 +80,10 @@ public class DogController {
 			return "redirect:/";
 		}
 		User user = this.uService.getByEmail(email);
+		//System.out.println(user.getId());
 		session.setAttribute("user_id", user.getId());
+		//System.out.println((Long)session.getAttribute("user_id"));
+
 		return "redirect:/dogs";
 		
 	}

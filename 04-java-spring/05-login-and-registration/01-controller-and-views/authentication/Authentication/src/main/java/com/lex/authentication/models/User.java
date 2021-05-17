@@ -15,19 +15,6 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="users")
 public class User {
-	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    private String email;
-    private String password;
-    @Transient
-    private String passwordConfirmation;
-    @Column(updatable=false)
-    private Date createdAt;
-    private Date updatedAt;
-    
-    public User() {
-    }
     public Long getId() {
 		return id;
 	}
@@ -86,7 +73,19 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+    private String email;
+    private String password;
+    @Transient
+    private String passwordConfirmation;
+    @Column(updatable=false)
+    private Date createdAt;
+    private Date updatedAt;
+    
+    public User() {
+    }
     
     
     // other getters and setters removed for brevity
