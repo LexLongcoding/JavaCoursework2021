@@ -13,6 +13,7 @@
 <body>
 <div class="container">
 <h2>Details For <c:out value="${dog.name}"/></h2>
+<p>Owner: <a href="/profile/${dog.owner.id}">${dog.owner.firstName}</a></p>
 <hr>
 <p>Name: ${dog.name }</p>
 <p>Breed: ${dog.breed }</p>

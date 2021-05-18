@@ -59,7 +59,7 @@ public class DogController {
 	@GetMapping("/dogs")
 	public String index(Model viewModel, HttpSession session) {
 		Long userId = (Long)session.getAttribute("user_id");
-		System.out.println((Long)session.getAttribute("user_id"));
+		//System.out.println((Long)session.getAttribute("user_id"));
 		if(userId == null) {
 			return"redirect:/";
 		}
@@ -72,6 +72,8 @@ public class DogController {
 		viewModel.addAttribute("user", user);
 		return "index.jsp";
 	}
+	
+	
 	
 	@PostMapping("/login")
 	public String login(@RequestParam("loginEmail") String email, @RequestParam("loginPass") String password, RedirectAttributes redirectAttr, HttpSession session) {
@@ -100,18 +102,28 @@ public class DogController {
 	}
 	
 	@PostMapping("/add")
-	public String newPet(@Valid @ModelAttribute("dog") Dog dog, BindingResult result) {
+	public String newPet(@Valid @ModelAttribute("dog") Dog dog, BindingResult result, HttpSession session) {
 		if(result.hasErrors()) {
 			return "new.jsp";
 		}
+		Long userId = (Long)session.getAttribute("user_id");
+		User userThatAddedDog = this.uService.find(userId);
+		dog.setOwner(userThatAddedDog);
 		this.dService.createDog(dog);
-		return "redirect:/";
+		return "redirect:/dogs";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deletePet(@PathVariable("id") Long id) {
 		this.dService.deleteDog(id);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/profile/{id}")
+	public String profile(@PathVariable("id")Long id, Model viewModel) {
+		viewModel.addAttribute("user", this.uService.find(id));
+		return "profile.jsp";
+		
 	}
 	
 	@GetMapping("/{id}")
@@ -140,13 +152,15 @@ public class DogController {
 			viewModel.addAttribute("dog", this.dService.getSingleDog(id));
 			return "edit.jsp";
 		}
+		
 		this.dService.updateDog(dog);
 		return "redirect:/{id}";
 	}
 	
+	
 	@GetMapping("/like/{id}")
 	public String like(@PathVariable("id") Long id, HttpSession session) {
-		Long userId = (Long)session.getAttribute("user__id");
+		Long userId = (Long)session.getAttribute("user_id");
 		Long petId = id;
 		User liker = this.uService.find(userId);
 		Dog likedDog = this.dService.getSingleDog(petId);
@@ -156,7 +170,7 @@ public class DogController {
 	
 	@GetMapping("/unlike/{id}")
 	public String unlike(@PathVariable("id") Long id, HttpSession session) {
-		Long userId = (Long)session.getAttribute("user__id");
+		Long userId = (Long)session.getAttribute("user_id");
 		Long petId = id;
 		User liker = this.uService.find(userId);
 		Dog likedDog = this.dService.getSingleDog(petId);

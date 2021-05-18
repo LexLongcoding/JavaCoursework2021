@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +12,11 @@
 </head>
 <body>
 <div class="container">
-<h1>Welcome to Dogs dot Com, <c:out value="${user.firstName}"/></h1>
+<h1>Welcome the Dog House, <c:out value="${user.firstName}"/></h1>
 
 <hr>
-<a href="/add">Add A New Dog</a> | <a href="/toys/new">Gift Pup a Toy</a> | <a href="/logout">Logout</a>
+<t:header>
+
 <table class="table table-dark">
 <thead>
 <td>Like?</td>
@@ -61,7 +64,9 @@
 
 </tbody>
 </table>
+</t:header>
 
 </div>
+
 </body>
 </html>
