@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="container">
+<p>${errorMsg}</p>
 <h2>Details For <c:out value="${dog.name}"/></h2>
 <p>Owner: <a href="/profile/${dog.owner.id}">${dog.owner.firstName}</a></p>
 <hr>
@@ -63,7 +64,9 @@
 </c:otherwise>
 
 </c:choose>
+<c:if test="${dog.owner.id == userId }">
 <a href="/edit/${dog.id}">Edit Dog</a>
+</c:if>
 
 
 

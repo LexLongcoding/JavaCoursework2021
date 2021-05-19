@@ -107,7 +107,7 @@ public class DogController {
 			return "new.jsp";
 		}
 		Long userId = (Long)session.getAttribute("user_id");
-		User userThatAddedDog = this.uService.find(userId);
+		User userThatAddedDog = this.uService.find(userId); 
 		dog.setOwner(userThatAddedDog);
 		this.dService.createDog(dog);
 		return "redirect:/dogs";
@@ -127,15 +127,22 @@ public class DogController {
 	}
 	
 	@GetMapping("/{id}")
-	public String showDog(@PathVariable("id") Long id, Model viewModel, @ModelAttribute("tag") Tag tag) {
+	public String showDog(@PathVariable("id") Long id, Model viewModel, @ModelAttribute("tag") Tag tag, HttpSession session) {
 		Dog dogToShowcase = this.dService.getSingleDog(id);
 		viewModel.addAttribute("dog", dogToShowcase);
+		viewModel.addAttribute("userId", session.getAttribute("user_id"));
 		return "show.jsp";
 	}
 	
 	@GetMapping("/edit/{id}")
-	public String editDog(@PathVariable("id") Long id, @ModelAttribute("dog") Dog dog, Model viewModel) {
-		viewModel.addAttribute("dog", this.dService.getSingleDog(id));
+	public String editDog(@PathVariable("id") Long id, @ModelAttribute("dog") Dog dog, Model viewModel, HttpSession session, RedirectAttributes redirectAttr) {
+		Long userId = (long)session.getAttribute("user_id");
+		Dog dogToEdit = this.dService.getSingleDog(id);
+		if((long)dogToEdit.getOwner().getId() !=(long) userId) {
+			redirectAttr.addFlashAttribute("ErrorMsg", "only dog owner may edit");
+			return "redirect:/{id}";
+		}
+		viewModel.addAttribute("dog", dogToEdit);
 		return "edit.jsp";
 	}
 	@PostMapping("/addTag/{id}")

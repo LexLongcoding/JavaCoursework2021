@@ -12,7 +12,7 @@
 <div class="container">
 
 <nav>
-<a href="dogs">All Dogs</a> |
+<a href="/dogs">All Dogs</a> |
 <a href="/add">create a dog</a> |
 <a href="toys/new">Give a dog a toy</a> |
 <a href="/logout">Logout</a>
