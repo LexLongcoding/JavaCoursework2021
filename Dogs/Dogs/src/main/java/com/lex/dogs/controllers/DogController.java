@@ -116,7 +116,7 @@ public class DogController {
 	@GetMapping("/delete/{id}")
 	public String deletePet(@PathVariable("id") Long id) {
 		this.dService.deleteDog(id);
-		return "redirect:/";
+		return "redirect:/dogs";
 	}
 	
 	@GetMapping("/profile/{id}")

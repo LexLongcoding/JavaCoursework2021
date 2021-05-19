@@ -127,11 +127,28 @@ public class EventController {
 		this.eService.update(event);
 		return "redirect:/events";
 	}
-	@DeleteMapping("/{id}")
-	public String Delete(@PathVariable("id") Long id) {
-		this.eService.delete(id);
-		return "redirect:/events";
+	
+	public Long userSession(HttpSession session) {
+		if(session.getAttribute("userId") == null) {
+			return null;
+		}
+		return (Long)session.getAttribute("userId");
 	}
+	@GetMapping("delete/{id}")
+	public String delete(@PathVariable("id")Long id, HttpSession session) {
+		Event event = eService.findById(id);
+		if(!event.getPlanner().getId().equals(userSession(session))) {
+			return "redirect:/";
+			
+			
+		}
+		else {
+			eService.deleteEvent(id);
+			return "redirect:/events";
+		}
+	}
+	
+	
 	@GetMapping("/{id}/a/{choice}")
 	public String ManageAttendeees(@PathVariable("id") Long id, @PathVariable("choice") String choice, HttpSession session) {
 		Long userId = this.userSessionId(session);

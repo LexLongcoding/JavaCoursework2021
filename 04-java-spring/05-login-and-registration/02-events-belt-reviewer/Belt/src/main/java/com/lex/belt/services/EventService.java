@@ -38,9 +38,10 @@ public class EventService {
 	public void comment(User user, Event event, String comment) {
 		this.mRepo.save(new Message(user, event, comment));
 	}
-	public void delete(Long id) {
+	public void deleteEvent(Long id) {
 		this.eRepo.deleteById(id);
 	}
+	
 	public void manageAttendees(Event event, User user, boolean isJoining) {
 		if(isJoining) {
 			event.getAttendees().add(user);
