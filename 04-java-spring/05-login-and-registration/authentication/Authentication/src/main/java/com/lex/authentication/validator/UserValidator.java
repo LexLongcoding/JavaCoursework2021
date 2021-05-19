@@ -15,7 +15,6 @@ public class UserValidator {
 	public boolean supports(Class<?> clazz) {
 		return User.class.equals(clazz);
 	}
-	
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
 		if(!user.getPassword().equals(user.getPasswordConfirmation())) {

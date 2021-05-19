@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lex.authentication.models.User;
 import com.lex.authentication.services.UserService;
+import com.lex.authentication.validator.UserValidator;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private UserValidator validator;
 	
 	@Autowired
 	private  UserService uRepo;
@@ -32,8 +35,9 @@ public class HomeController {
 			}
 	@PostMapping("/registration")
 	public String registrationUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+		validator.validate(user, result);
 		if(result.hasErrors()) {
-			return "registration.jsp";
+			return "registrationPage.jsp";
 		}
 		User u = uRepo.Registration(user);
 		session.setAttribute("user", u.getId());

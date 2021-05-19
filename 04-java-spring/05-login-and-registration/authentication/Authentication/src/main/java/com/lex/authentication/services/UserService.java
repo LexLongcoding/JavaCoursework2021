@@ -39,23 +39,18 @@ public class UserService {
 		}
 	}
 	
-	//authenicate user
+	//authenticate user
 	public boolean authenicateUser(String email, String password){
 		//first find the user by email 
-		User user = uRepo.findByEmail(email);
-		//if we can't find it by email return false
+		User user = this.uRepo.findByEmail(email);
 		
 		if(user == null) {
 			return false;
-		}else {
-			//if password match return true else return false
-			if(BCrypt.checkpw(password,  user.getPassword())) {
-				return true;
-			} else {
-				return false;
-			}
 		}
-	}
+		return BCrypt.checkpw(password, user.getPassword());
+	}	
+		
+}
 	
 
-}
+
