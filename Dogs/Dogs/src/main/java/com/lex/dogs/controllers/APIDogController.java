@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lex.dogs.models.Dog;
 import com.lex.dogs.services.DogService;
 
-@RestController
+/*@RestController
 @RequestMapping("/api")
 public class APIDogController {
 	@Autowired
@@ -37,7 +37,7 @@ public class APIDogController {
 	}
 	
 	//@RequestMapping ("/value="/delete/{id}", method = RequestMethod.Delete)
-	@DeleteMapping (value="/delete/{id}")
+	/*@DeleteMapping (value="/delete/{id}")
 	public void deleteDog(@PathVariable("id")Long id) {
 		this.dService.deleteDog(id);
 	}
@@ -47,4 +47,4 @@ public class APIDogController {
 			return this.dService.updateDog(updatedDog);
 		}
 
-}
+}*/
