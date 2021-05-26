@@ -1,0 +1,5 @@
+package com.lex.secure.controllers;
+
+public interface HomeController {
+
+}

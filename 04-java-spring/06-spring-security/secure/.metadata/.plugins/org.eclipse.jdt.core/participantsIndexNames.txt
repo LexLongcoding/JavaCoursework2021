@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+C:\Users\aslon\Java21\secure\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2102355518.index
+\secure\src\main\java

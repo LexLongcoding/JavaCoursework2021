@@ -25,20 +25,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Size(min=2, max=15)
-	private String firstName;
-	@NotBlank
-	@Size(min=2, max=30)
-	private String lastName;
+	private String Name;
 	@Email
 	@NotBlank
 	private String email;
+	@Size(min=8)
 	private String password;
 	@Transient
 	private String confirmPassword;
 	
-	/*@OneToMany(mappedBy="creator", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Thought> thoughts;
+	@OneToMany(mappedBy="creator", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Idea> ideas;
 	
 	
 	
@@ -46,42 +43,37 @@ public class User {
 	@JoinTable(
 			name="likes",
 			joinColumns = @JoinColumn(name="user_id"),
-			inverseJoinColumns = @JoinColumn(name="thought_id")
+			inverseJoinColumns = @JoinColumn(name="idea_id")
 			)
-	private List<Thought> likes;
+	private List<Idea> likes;
 	
-	public List<Thought> getLikes() {
+	public List<Idea> getLikes() {
 		return likes;
 	}
-	public List<Thought> getThoughts() {
-		return thoughts;
+	public List<Idea> getIdeas() {
+		return ideas;
 	}
-	public void setThoughts(List<Thought> thoughts) {
-		this.thoughts = thoughts;
+	public void setIdeas(List<Idea> ideas) {
+		this.ideas = ideas;
 	}
-	public void setLikes(List<Thought> likes) {
+	public void setLikes(List<Idea> likes) {
 		this.likes = likes;
-	}*/
-	public User() {
-
 	}
+	public User() {
+		}
+	
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return Name;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		Name = name;
 	}
 	public String getEmail() {
 		return email;
@@ -103,3 +95,5 @@ public class User {
 	}
 	
 }
+
+	

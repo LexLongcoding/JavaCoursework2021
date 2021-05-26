@@ -1,0 +1,5 @@
+package com.lex.secure.repositories;
+
+public interface RoleRepository {
+
+}

@@ -18,7 +18,7 @@ public class UserValidator {
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
 		if(!user.getPassword().equals(user.getConfirmPassword())) {
-			errors.rejectValue("password", "Match", "Passwords do not match!!!!!");
+			errors.rejectValue("password", "Match", "Passwords do not match");
 		}
 		
 		if(this.uRepo.existsByEmail(user.getEmail())) {

@@ -1,0 +1,5 @@
+package com.lex.secure.models;
+
+public class User {
+
+}

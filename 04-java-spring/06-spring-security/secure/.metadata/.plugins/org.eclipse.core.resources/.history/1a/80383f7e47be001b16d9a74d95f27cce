@@ -1,0 +1,10 @@
+package com.lex.secure.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.lex.secure.models.Role;
+
+@Repository
+public interface RoleRepository extends CrudRepository<Role, Long> {
+}

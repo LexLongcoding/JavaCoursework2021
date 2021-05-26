@@ -1,0 +1,5 @@
+package com.lex.secure.configurations;
+
+public class WebSecurityConfig {
+
+}
